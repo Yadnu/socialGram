@@ -1,41 +1,49 @@
-import {createBrowserRouter } from "react-router-dom"
-import Login from "./pages/login"
-import Error from "./pages/error"
-import Home from "./pages/home"
-import CreatePost from "./pages/post"
-import Profile from "./pages/profile"
-import MyPhotos from "./pages/myphotos"
-import Signup from "./pages/signup"
+import { createBrowserRouter } from "react-router-dom";
+import Login from "./pages/login";
+import Error from "./pages/error";
+import Signup from "./pages/signup";
+import Home from "./pages/home";
+import CreatePost from "./pages/post";
+import Profile from "./pages/profile";
+import MyPhotos from "./pages/myphotos";
+import ProtectedRoutes from "./components/ui/ProtectedRoutes";
 
 export const router = createBrowserRouter([
-    {
-        path: "/login",
-        element: <Login/>,
-        errorElement: <Error />
-    },
-    {
-        path: "/home",
-        element: <Home/>,
-        errorElement: <Error />
-    },
-    {
+  {
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+        errorElement: <Error />,
+      },
+      {
         path: "/post",
-        element: <CreatePost/>,
-        errorElement: <Error />
-    },
-    {
+        element: <CreatePost />,
+        errorElement: <Error />,
+      },
+      {
         path: "/profile",
-        element: <Profile/>,
-        errorElement: <Error />
-    },
-    {
+        element: <Profile />,
+        errorElement: <Error />,
+      },
+      {
         path: "/myphotos",
-        element: <MyPhotos/>,
-        errorElement: <Error />
-    },
-    {
-        path: "/signup",
-        element: <Signup/>,
-        errorElement: <Error />
-    },
-] )
+        element: <MyPhotos />,
+        errorElement: <Error />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+    errorElement: <Error />,
+  },
+]);
+
+export default router;
